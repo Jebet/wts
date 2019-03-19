@@ -1,5 +1,7 @@
 import React from "react";
 import { Alert, Button, Modal } from "react-bootstrap";
+import ReactTable from "react-table";
+import "react-table/react-table.css";
 import $ from "jquery";
 import "../Table/Table.css";
 
@@ -15,8 +17,8 @@ class FormTable extends React.Component {
       telephone: "",
       amount: "",
       department: "",
-      users: [],
-      lgshow: false
+      lgshow: false,
+      users: []
     };
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -91,7 +93,42 @@ class FormTable extends React.Component {
   handleShow() {
     this.setState({ lgshow: true });
   }
+
+  componentDidMount() {
+    fetch("");
+  }
   render() {
+    const index = {
+      indexKey: "_index"
+    };
+    const data = [
+      {
+        users: []
+      }
+    ];
+    const columns = [
+      {
+        Header: "Name",
+        accessor: "name"
+      },
+      {
+        Header: "Phone Number",
+        accessor: "telephone"
+      },
+      {
+        Header: "Department",
+        accessor: "department"
+      },
+      {
+        Header: "Amount",
+        accessor: "amount"
+      },
+      {
+        Header: "Status",
+        accessor: "status"
+      }
+    ];
+
     return (
       <div className="wrapper">
         <>
@@ -238,43 +275,36 @@ class FormTable extends React.Component {
         </>
 
         <div className="container">
-          <div>
-            <input
-              onChange={this.props.search}
-              id="searchBar"
-              placeholder="Search..."
-            />
-          </div>
-          <table className="table table-hover">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Telephone</th>
-                <th>Amount</th>
-                <th>Department</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.users.map((data, index) => {
-                return (
-                  <Row
-                    editRow={this.editRow.bind(this)}
-                    users={this.state.users}
-                    data={data}
-                    key={index}
-                    row={index}
-                    deleteRow={this.deleteRow.bind(this)}
-                  />
-                );
-              })}
-            </tbody>
-          </table>
+          <ReactTable
+            data={data}
+            defaultPageSize={10}
+            columns={columns}
+            users={this.state.users}
+            data={data}
+            key={index}
+            row={index}
+            minwidth={100}
+            deleteRow={this.deleteRow.bind(this)}
+          />
 
           {!this.state.show && (
             <Button variant="primary" onClick={this.handleShow}>
               Add User
             </Button>
           )}
+
+          {this.state.users.map((data, index) => {
+            return (
+              <Row
+                editRow={this.editRow.bind(this)}
+                users={this.state.users}
+                data={data}
+                key={index}
+                row={index}
+                deleteRow={this.deleteRow.bind(this)}
+              />
+            );
+          })}
         </div>
       </div>
     );

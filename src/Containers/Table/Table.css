@@ -1,0 +1,104 @@
+label {
+  font-weight: normal;
+}
+
+.alert-heading {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: black;
+}
+input {
+  border: 2px solid #ccc !important;
+  height: 35px;
+  border-radius: 3px;
+  max-width: 100%;
+}
+.btn-default {
+  color: white;
+  background-color: gold;
+  border-radius: 2px;
+  border: gold 1px solid;
+  right: 18px;
+  top: -2px;
+}
+
+.input-group-addon {
+  border: 2px solid black !important;
+  border-right: 0px !important;
+}
+
+.btn {
+  border: 0;
+  border-radius: 3px;
+  margin-top: 20px;
+}
+.form-horizontal {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.form-group {
+  left: 18px;
+}
+#searchBar {
+  width: 30%;
+  border-radius: 3px;
+  left: 200px;
+  top: -20px;
+}
+.form-horizontal {
+  background-color: white;
+  border-radius: 2px;
+  width: 400px;
+  height: auto;
+  padding: 0px;
+  margin: 0 auto;
+  left: 0;
+  padding-top: 10px;
+}
+.wrapper {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 30px 0;
+  outline: 1pt;
+  border-radius: 2px solid grey;
+}
+#Alert {
+}
+.fa-user-plus {
+  padding-right: 10px;
+}
+.fa-upload {
+  display: flex;
+  flex-direction: row;
+  left: 300px;
+  top: -34px;
+  width: 25px;
+  color: black;
+}
+
+select {
+  border: 2px solid #ccc !important;
+  height: 35px;
+  border-radius: 3px;
+  max-width: 100%;
+}
+.input-group {
+  height: 90px;
+  width: 600px;
+}
+@media (max-width: 800px) {
+  #searchBar {
+    width: 100%;
+    position: relative;
+  }
+  .form-horizontal {
+    width: 100%;
+  }
+}
+button {
+  width: 120px;
+  height: 40px;
+}

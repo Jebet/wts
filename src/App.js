@@ -4,7 +4,7 @@ import Layout from "./Component/Layout/Layout";
 import Table from "./Containers/Table/Table";
 import HomePage from "./Dashboard/HomePage";
 import Airtime from "./Containers/Table/Table";
-import Daily from  "./Containers/Daily/Daily";
+import Daily from "./Containers/Daily/Daily";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import store from "./Containers/Store/Store";
 import { Provider } from "react-redux";

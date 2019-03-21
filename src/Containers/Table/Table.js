@@ -98,14 +98,8 @@ class FormTable extends React.Component {
     fetch("");
   }
   render() {
-    const index = {
-      indexKey: "_index"
-    };
-    const data = [
-      {
-        users: []
-      }
-    ];
+    const index = this.props.index;
+    const data = this.props.data;
     const columns = [
       {
         Header: "Name",
@@ -280,11 +274,6 @@ class FormTable extends React.Component {
             defaultPageSize={10}
             columns={columns}
             users={this.state.users}
-            data={data}
-            key={index}
-            row={index}
-            minwidth={100}
-            deleteRow={this.deleteRow.bind(this)}
           />
 
           {!this.state.show && (

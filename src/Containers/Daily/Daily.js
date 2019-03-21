@@ -5,7 +5,7 @@ import thunk from "redux-thunk";
 import { logger } from "redux-logger";
 import { Field, Control, Form, combineForms } from "react-redux-form";
 import store from "../Store/Store";
-import "../Daily/Daily.css";
+import "../Daily/Daily.scss";
 
 const initialUserState = {
   firstName: "",
@@ -29,6 +29,7 @@ class Daily extends React.Component {
                   model=".firstName"
                   placeholder="First Name"
                   id="input-name"
+                  type="text"
                 />
               </div>
             </div>

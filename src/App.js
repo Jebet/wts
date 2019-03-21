@@ -8,6 +8,7 @@ import Daily from "./Containers/Daily/Daily";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import store from "./Containers/Store/Store";
 import { Provider } from "react-redux";
+import MenuContainer from "./Component/Navigation/MenuFolder/MenuContainer";
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
       <Provider store={store}>
         <div>
           <Layout>
+            <MenuContainer />
             <Container>
               <Router>
                 <div>

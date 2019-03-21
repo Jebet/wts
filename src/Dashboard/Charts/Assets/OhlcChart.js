@@ -10,7 +10,7 @@ class OhlcChart extends Component {
       theme: "dark2",
       exportFileName: "Distribution Competitions",
       title: {
-        text: "Distributors- 2017"
+        text: "Distributors- 2019"
       },
       axisX: {
         interval: 1,
@@ -39,7 +39,7 @@ class OhlcChart extends Component {
             { x: new Date("2017-09-01"), y: [23.9, 25.64, 22.75, 25.34] },
             { x: new Date("2017-10-01"), y: [25.46, 27.98, 25.12, 27.39] },
             { x: new Date("2017-11-01"), y: [27.64, 28.72, 25.81, 28.17] },
-            { x: new Date("2017-12-01"), y: [28.25, 30.03, 27.5, 29.52] }
+            { x: new Date("2018-12-01"), y: [28.25, 30.03, 27.5, 29.52] }
           ]
         }
       ]

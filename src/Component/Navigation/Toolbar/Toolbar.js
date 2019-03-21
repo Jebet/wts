@@ -5,9 +5,11 @@ import "./Toolbar.css";
 import NavigationItems from "../NavigationItems/Navigation";
 import DrawerToggle from "../SideDrawer/ToggleDrawer/ToggleDrawer";
 import logo from "../../../Assets/logo/logo.png";
+// import SidebarExampleSidebar from "../SideBar/sideBar";
 
 const toolbar = props => (
   <header className="Toolbar">
+    
     <DrawerToggle clicked={props.drawerToggleClicked} />
     <div className="toolbar-logo">
       <a href="/home">

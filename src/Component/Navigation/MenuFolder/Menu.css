@@ -1,0 +1,49 @@
+#flyoutMenu {
+  width: 15vw;
+  height: 100vh;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: transform 0.3s cubic-bezier(0, 0.52, 0, 1);
+  overflow: scroll;
+  z-index: 1000;
+  padding-left: 15px;
+  margin-top: 56px;
+  padding-top: 20px;
+  color: white;
+}
+.fa-tachometer-alt {
+  padding-right: 10px;
+}
+.fa-comment-alt {
+  padding-right: 12px;
+}
+.fa-share-square {
+  padding-right: 10px;
+}
+.fa-cog {
+  padding-right: 10px;
+}
+#flyoutMenu.hide {
+  transform: translate3d(-100vw, 0, 0);
+}
+
+#flyoutMenu.show {
+  transform: translate3d(0vw, 0, 0);
+  overflow: hidden;
+}
+
+#flyoutMenu h6 {
+  color: white;
+  margin-left: 0px;
+  text-decoration: none;
+}
+
+#flyoutMenu h6 :hover {
+  text-decoration: underline;
+  color: white;
+}
+h6 {
+  color: white;
+}

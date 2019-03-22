@@ -16,9 +16,7 @@ const sideDrawer = props => {
       <Backdrop show={props.open} clicked={props.closed} />
       <div className={attachedClasses.join(" ")}>
         <div className="toolbar-logo">
-          <a href="/home">
-            <img src={logo} className="logoImage" alt="shujaaz" />
-          </a>
+          <a href="/home" />
           {/* <Sidebar /> */}
         </div>
         <nav>

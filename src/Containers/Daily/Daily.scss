@@ -3,6 +3,9 @@ form {
 
   border: solid 2px #ccc;
 }
+.daily-container {
+  bottom: 80px;
+}
 .dailyform {
   width: 400px;
   position: relative;
@@ -36,7 +39,7 @@ $color-primary: #1695a3;
   font-weight: 600;
   color: $color-label;
 }
-.option li{
+.option li {
   display: block;
   font-size: 0.8rem;
   line-height: 1.4rem;

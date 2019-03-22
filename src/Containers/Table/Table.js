@@ -270,10 +270,9 @@ class FormTable extends React.Component {
 
         <div className="container">
           <ReactTable
-            data={data}
+            data={this.state.users}
             defaultPageSize={10}
             columns={columns}
-            users={this.state.users}
           />
 
           {!this.state.show && (
@@ -284,14 +283,15 @@ class FormTable extends React.Component {
 
           {this.state.users.map((data, index) => {
             return (
-              <Row
-                editRow={this.editRow.bind(this)}
-                users={this.state.users}
-                data={data}
-                key={index}
-                row={index}
-                deleteRow={this.deleteRow.bind(this)}
-              />
+              <div></div>
+              // <Row
+              //   editRow={this.editRow.bind(this)}
+              //   users={this.state.users}
+              //   data={data}
+              //   key={index}
+              //   row={index}
+              //   deleteRow={this.deleteRow.bind(this)}
+              // />
             );
           })}
         </div>
@@ -299,33 +299,33 @@ class FormTable extends React.Component {
     );
   }
 }
-class Row extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+// class Row extends React.Component {
+//   constructor(props) {
+//     super(props);
+//   }
 
-  render() {
-    return (
-      <tr>
-        <td>{this.props.data.name}</td>
-        <td>{this.props.data.telephone}</td>
-        <td>{this.props.data.amount}</td>
-        <td>{this.props.data.department}</td>
+//   render() {
+//     return (
+//       <tr>
+//         <td>{this.props.data.name}</td>
+//         <td>{this.props.data.telephone}</td>
+//         <td>{this.props.data.amount}</td>
+//         <td>{this.props.data.department}</td>
 
-        <td
-          className="fa fa-trash-o"
-          onClick={() => {
-            this.props.deleteRow(this.props.row);
-          }}
-        />
-        <td
-          className="fa fa-pencil-square"
-          onClick={() => {
-            this.props.editRow(this.props.row);
-          }}
-        />
-      </tr>
-    );
-  }
-}
+//         <td
+//           className="fa fa-trash-o"
+//           onClick={() => {
+//             this.props.deleteRow(this.props.row);
+//           }}
+//         />
+//         <td
+//           className="fa fa-pencil-square"
+//           onClick={() => {
+//             this.props.editRow(this.props.row);
+//           }}
+//         />
+//       </tr>
+//     );
+//   }
+// }
 export default FormTable;

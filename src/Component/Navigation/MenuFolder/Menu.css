@@ -12,6 +12,7 @@
   margin-top: 56px;
   padding-top: 20px;
   color: white;
+  padding-top: 60px;
 }
 .fa-tachometer-alt {
   padding-right: 10px;
@@ -46,4 +47,13 @@
 }
 h6 {
   color: white;
+}
+.fa-times {
+  left: 160px;
+  bottom: 30px;
+}
+@media (max-width: 20vw) {
+  #flyoutMenu {
+    margin-left: -250px;
+  }
 }

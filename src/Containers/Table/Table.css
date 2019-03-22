@@ -64,6 +64,7 @@ input {
   padding: 30px 0;
   outline: 1pt;
   border-radius: 2px solid grey;
+  bottom: 100px;
 }
 #Alert {
 }
@@ -101,5 +102,4 @@ select {
 button {
   width: 120px;
   height: 40px;
-  
 }

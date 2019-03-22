@@ -15,7 +15,7 @@ const initialUserState = {
 class Daily extends React.Component {
   render() {
     return (
-      <div className="container">
+      <div className="daily-container">
         <div className="col-md-12">
           <Form
             model="user"

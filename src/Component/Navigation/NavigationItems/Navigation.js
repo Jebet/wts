@@ -1,4 +1,5 @@
 import React from "react";
+// import Menu from "../MenuFolder/Menu";
 
 import "../../Navigation/NavigationItems/Navigation.css";
 import NavItem from "../NavItems/NavItems";
@@ -8,6 +9,7 @@ const navigation = () => (
     <NavItem link="/home">Dashboard</NavItem>
     <NavItem link="/daily">Daily</NavItem>
     <NavItem link="/airtime">Airtime</NavItem>
+  
   </ul>
 );
 

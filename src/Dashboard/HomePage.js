@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Segment } from "semantic-ui-react";
+// import { Container, Segment } from "semantic-ui-react";
 import AreaChart from "./Charts/Assets/AreaChart";
 import DoughnutChart from "./Charts/Assets/DoughnutChart";
 import OhlcChart from "./Charts/Assets/OhlcChart";

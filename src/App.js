@@ -9,9 +9,19 @@ import Daily from "./Containers/Daily/Daily";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import store from "./Containers/Store/Store";
 import { Provider } from "react-redux";
-import MenuContainer from "./Component/Navigation/MenuFolder/MenuContainer";
+import axios from "axios";
 
 class App extends Component {
+  componentDidMount() {
+    axios
+      .get("https://dog.ceo/api/breeds/image/random")
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
   render() {
     return (
       <Provider store={store}>
@@ -19,19 +29,18 @@ class App extends Component {
           <Layout>
             <Container>
               <Router>
-              <MenuContainer />
-                <Menu />
+                {/* <MenuContainer /> */}
                 <div>
                   <Switch>
                     <Route path="/home" exact component={HomePage} />
                     <Route path="/airtime" exact component={Airtime} />
                     <Route path="/daily" exact component={Daily} />
-                    <Route path="/menu" exact component={Menu} />
-                    <Route
+                    <Route path="/Menu" exact component={Menu} />
+                    {/* <Route
                       path="/menucontainer"
                       exact
                       component={MenuContainer}
-                    />
+                    /> */}
 
                     <Daily />
                   </Switch>

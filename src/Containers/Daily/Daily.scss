@@ -1,10 +1,13 @@
 form {
   max-width: 100%;
 
-  border: solid 2px #ccc;
+  border: solid 1px #ccc;
 }
 .daily-container {
-  bottom: 80px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .dailyform {
   width: 400px;
@@ -12,9 +15,8 @@ form {
   border-radius: 5px;
   background-color: white;
   padding-left: 30px;
-  margin: 0 auto;
-  height: 550px;
-  padding-top: 20px;
+  height: 680px;
+  padding-top: 10px;
 }
 
 $color-border: #cdcdcd;
@@ -24,6 +26,7 @@ $color-primary: #1695a3;
 .field {
   display: block;
   margin-bottom: 0.5rem;
+  width: 100%;
 }
 ::placeholder {
   display: block;
@@ -99,7 +102,12 @@ button {
   &:hover {
     opacity: 0.8;
   }
-
+  .upload {
+    width: 120px;
+    height: auto;
+    left: 16px;
+    bottom: 5px;
+  }
   &[type="reset"] {
     color: $color-primary;
     border: 1px solid $color-primary;
@@ -141,4 +149,13 @@ html {
   margin: 0;
   display: flex;
   align-items: center;
+}
+input {
+  border: 1px solid #ccc !important;
+}
+@media (min-width: "400px") {
+  .dailyform {
+    min-width: 350px;
+    margin: 0 auto;
+  }
 }

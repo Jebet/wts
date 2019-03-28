@@ -1,59 +1,45 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
-import HomePage from "../../../Dashboard/HomePage";
-import Airtime from "../../../Containers/Table/Table";
-import Daily from "../../../Containers/Daily/Daily";
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import { SideNav, MenuIcon } from "react-simple-sidenav";
+// import HomePage from "../../../Dashboard/HomePage";
+// import Airtime from "../../../Containers/Table/Table";
+// import Daily from "../../../Containers/Daily/Daily";
+// import Navigation from "../NavigationItems/Navigation";
 import "./Menu.css";
+// import NavigationItems from "../NavigationItems/Navigation";
+import NavItem from "../NavItems/NavItems";
 
-class Menu extends Component {
+class Menu extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      showNav: false
+    };
+  }
   render() {
-    var visibility = "hide";
-
-    if (this.props.menuVisibility) {
-      visibility = "show";
-    }
-
     return (
-      <Router>
-        <div
-          id="flyoutMenu"
-          onMouseDown={this.props.handleMouseDown}
-          className={visibility}
-        >
-          <div className="links">
-            <div id="dismiss">
-              <i class="fa fa-times" />
-            </div>
-            <h6>
-              <Link to="/dashboard/" style={{ color: "white" }}>
-                <i class="fas fa-tachometer-alt" />
-                Dashboard
-              </Link>
-            </h6>
-            <br />
-            <h6>
-              <Link to="/daily" style={{ color: "white" }}>
-                <i class="far fa-comment-alt" />
-                Daily
-              </Link>
-            </h6>
-            <br />{" "}
-            <h6>
-              <Link to="/airtime" style={{ color: "white" }}>
-                <i class="fas fa-share-square" />
-                Airtime
-              </Link>
-            </h6>
-            <br />
-            <h6>
-              <Link to="/settings" style={{ color: "white" }}>
-                <i class="fas fa-cog" />
-                Settings
-              </Link>
-            </h6>
-          </div>
-        </div>
-      </Router>
+      <div>
+        <MenuIcon onClick={() => this.setState({ showNav: true })} />
+        <Router>
+          <SideNav
+            showNav={this.state.showNav}
+            onHideNav={() => this.setState({ showNav: false })}
+            title="Hello User"
+            titleStyle={{ backgroundColor: "#800080" }}
+            itemStyle={{
+              backgroundColor: "#000",
+              right: "40px",
+              width: "400px"
+            }}
+            itemHoverStyle={{ backgroundColor: "#000" }}
+            items={[
+              <NavItem link="/home">Dashboard</NavItem>,
+              <NavItem link="/daily">Daily</NavItem>,
+              <NavItem link="/airtime">Airtime</NavItem>
+            ]}
+          />
+        </Router>
+      </div>
     );
   }
 }

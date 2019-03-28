@@ -1,8 +1,8 @@
 import React from "react";
-import { Alert, Button, Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import $ from "jquery";
+// import $ from "jquery";
 import "../Table/Table.css";
 
 console.clear();
@@ -26,22 +26,22 @@ class FormTable extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    if (this.submitInput.value == "Submit") {
+    if (this.submitInput.value === "Submit") {
       const obj = {
         name: this.state.name,
         telephone: this.state.telephone,
         amount: this.state.amount,
         department: this.state.department
       };
+
       this.setState({
         users: [...this.state.users, obj],
         name: "",
         telephone: "",
         amount: "",
-        department: "",
-        email: ""
+        department: ""
       });
-    } else if (this.submitInput.value == "Edit") {
+    } else if (this.submitInput.value === "Edit") {
       const pos = Number(this.rowRef.value);
       this.state.users[pos].name = this.inputName.value;
       this.state.users[pos].telephone = this.inputtelephone.value;
@@ -98,8 +98,8 @@ class FormTable extends React.Component {
     fetch("");
   }
   render() {
-    const index = this.props.index;
-    const data = this.props.data;
+    // const index = this.props.index;
+    // const data = this.props.data;
     const columns = [
       {
         Header: "Name",
@@ -129,7 +129,7 @@ class FormTable extends React.Component {
           <Modal
             show={this.state.lgshow}
             onHide={this.handleClose}
-            style="width: 1250px"
+            style={"width: 1250px"}
           >
             <Modal.Header closeButton>
               <Modal.Title>Shujaaz Form</Modal.Title>
@@ -159,7 +159,6 @@ class FormTable extends React.Component {
                       arial-describedby="basic-addon1"
                       id="input1"
                     />
-                    <i class="fa fa-upload fa-2x" />
                   </div>
                 </div>
 
@@ -179,8 +178,6 @@ class FormTable extends React.Component {
                       arial-describedby="basic-addon1"
                       id="input2"
                     />
-
-                    <i class="fa fa-upload fa-2x" />
                   </div>
                 </div>
 
@@ -211,7 +208,6 @@ class FormTable extends React.Component {
                       <option value="Finance">Finance</option>
                       <option value="Networks">Networks</option>
                     </select>
-                    <i class="fa fa-upload fa-2x" />
                   </div>
                 </div>
 
@@ -231,10 +227,12 @@ class FormTable extends React.Component {
                       id="input4"
                       style={{}}
                     />
-                    <i class="fa fa-upload fa-2x" />
                   </div>
                 </div>
-
+                <button className="upload" id="file">
+                  <i class="fas fa-file-upload" />
+                  <h6 className="contentName">file</h6>
+                </button>
                 <div className="form-group">
                   <div class="col-md-6">
                     <button
@@ -276,14 +274,14 @@ class FormTable extends React.Component {
           />
 
           {!this.state.show && (
-            <Button variant="primary" onClick={this.handleShow}>
+            <Button variant="primary" onClick={this.handleShow} id="addUser">
               Add User
             </Button>
           )}
 
           {this.state.users.map((data, index) => {
             return (
-              <div></div>
+              <div />
               // <Row
               //   editRow={this.editRow.bind(this)}
               //   users={this.state.users}

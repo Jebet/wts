@@ -2,7 +2,8 @@ import React from "react";
 import { Button, Modal } from "react-bootstrap";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-// import $ from "jquery";
+import axios from "axios";
+import Axios from "axios";
 import "../Table/Table.css";
 
 console.clear();
@@ -94,12 +95,34 @@ class FormTable extends React.Component {
     this.setState({ lgshow: true });
   }
 
-  componentDidMount() {
-    fetch("");
+  getUsers() {
+    axios
+      .get("https://api.myjson.com/bins/i7ka2")
+      .then(response =>
+        response.data.results.map(user => ({
+          name: `${user.name.first}`,
+          username: `${user.login.username}`,
+          telephone: `${user.telephone}`,
+          amount: `${user.amount}`,
+          department: `${user.department}`
+        }))
+      )
+      .then(users => {
+        this.setState({
+          users,
+          isLoading: false
+        });
+      })
+      .catch(error => this.setState({ error, isLoading: false }));
   }
+
+  componentDidMount() {
+    this.getUsers();
+  }
+
   render() {
     // const index = this.props.index;
-    // const data = this.props.data;
+    const { data } = this.state;
     const columns = [
       {
         Header: "Name",
@@ -271,6 +294,27 @@ class FormTable extends React.Component {
             data={this.state.users}
             defaultPageSize={10}
             columns={columns}
+            filterable={true}
+            onFetchData={this.fetchData}
+            manual // informs React Table that you'll be handling sorting and pagination server-side
+            onFetchData={(state, instance) => {
+              // show the loading overlay
+              this.setState({ loading: true });
+              // fetch your data
+              Axios.post("https://api.myjson.com/bins/1573y2", {
+                page: state.page,
+                pageSize: state.pageSize,
+                sorted: state.sorted,
+                filtered: state.filtered
+              }).then(res => {
+                // Update react-table
+                this.setState({
+                  data: res.data.rows,
+                  pages: res.data.pages,
+                  loading: false
+                });
+              });
+            }}
           />
 
           {!this.state.show && (

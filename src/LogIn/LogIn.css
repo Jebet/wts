@@ -3,8 +3,15 @@
     padding: 60px 0;
   }
 
-  .Login form {
+  .Login.form {
     margin: 0 auto;
     max-width: 320px;
   }
+  input[type="text"] {
+    width: 300px;
+  }
+  .col-md-6.col-md-offset-3 {
+    display: flex;
+  }
+  
 }

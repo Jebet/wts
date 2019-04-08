@@ -1,74 +1,121 @@
 import React from "react";
-import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
-import * as ReactBootstrap from "react-bootstrap";
-import { Auth } from "aws-amplify";
-import "./LogIn.css";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { userActions } from "../Action/UserActions";
+import store from "../Redux.Helpers/store";
 
-class Login extends React.Component {
+class LoginPage extends React.Component {
   constructor(props) {
     super(props);
 
+    // reset login status
+    this.props.dispatch(userActions.logout());
+
     this.state = {
-      email: "",
-      password: ""
+      username: "",
+      password: "",
+      submitted: false
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.routeChange = this.routeChange.bind(this);
+  }
+  routeChange() {
+    let path = `newPath`;
+    this.props.history.push("/home");
   }
 
-  validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0;
+  handleChange(e) {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
   }
 
-  handleChange = event => {
-    this.setState({
-      [event.target.id]: event.target.value
-    });
-  };
+  handleSubmit(e) {
+    e.preventDefault();
 
-  handleSubmit = async event => {
-    event.preventDefault();
-
-    try {
-      await Auth.signIn(this.state.email, this.state.password);
-      this.props.userHasAuthenticated(true);
-    } catch (e) {
-      alert(e.message);
+    this.setState({ submitted: true });
+    const { username, password } = this.state;
+    const { dispatch } = this.props;
+    if (username && password) {
+      dispatch(userActions.login(username, password));
     }
-  };
+  }
 
   render() {
+    const { loggingIn } = this.props;
+    const { username, password, submitted } = this.state;
     return (
-      <div className="login-wrapper">
-        <div className="Login">
-          <form onSubmit={this.handleSubmit}>
-            <FormGroup controlId="email" bsSize="large">
-              <FormLabel>Email</FormLabel>
-              <FormControl
-                autoFocus
-                type="email"
-                value={this.state.email}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <FormGroup controlId="password" bsSize="large">
-              <FormLabel>Password</FormLabel>
-              <FormControl
-                value={this.state.password}
-                onChange={this.handleChange}
-                type="password"
-              />
-            </FormGroup>
-            <Button
-              block
-              bsSize="large"
-              disabled={!this.validateForm()}
-              type="submit"
-            >
+      <div className="col-md-6 col-md-offset-3" id="login-cont">
+        <h2 style={{left: "270px"}}>Login</h2>
+        <form
+          name="form"
+          onSubmit={this.handleSubmit}
+          style={{ left: "250px", position: "relative" }}
+        >
+          <div
+            className={
+              "form-group" + (submitted && !username ? " has-error" : "")
+            }
+          >
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              className="form-control"
+              name="username"
+              value={username}
+              onChange={this.handleChange}
+              style={{ width: "90%" }}
+            />
+            {submitted && !username && (
+              <div className="help-block">Username is required</div>
+            )}
+          </div>
+          <div
+            className={
+              "form-group" + (submitted && !password ? " has-error" : "")
+            }
+          >
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              name="password"
+              value={password}
+              onChange={this.handleChange}
+              style={{ width: "90%" }}
+            />
+            {submitted && !password && (
+              <div className="help-block">Password is required</div>
+            )}
+          </div>
+          <div className="form-group">
+            <button className="btn btn-primary" onClick={this.routeChange}>
+              {" "}
               Login
-            </Button>
-          </form>
-        </div>
+            </button>
+            {loggingIn && (
+              <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            )}
+          </div>
+        </form>
       </div>
     );
   }
 }
-export default Login;
+
+function mapStateToProps(state) {
+  const { loggingIn } = state;
+  return {
+    loggingIn: state.authentication,
+    loggingIn
+  };
+}
+
+// const mapStateToProps = state => {
+//   const loggingIn = this.props.loggingIn;
+//   return { loggingIn: state.authentication }, { loggingIn };
+// };
+
+const connectedLoginPage = connect(mapStateToProps)(LoginPage);
+export { connectedLoginPage as LoginPage };

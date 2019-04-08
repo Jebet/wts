@@ -43,8 +43,8 @@ class Menu extends React.Component {
               </NavItem>,
               <NavItem link="/daily">Daily</NavItem>,
               <NavItem link="/airtime">Airtime</NavItem>,
-              <NavItem link="/signup">Signup</NavItem>,
-              <NavItem link="/login">Login</NavItem>
+              <NavItem link="/login">LogOut</NavItem>,
+              <NavItem link="/login">LogIn</NavItem>
             ]}
           />
         </Router>

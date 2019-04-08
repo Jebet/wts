@@ -10,6 +10,7 @@ const navigation = () => (
     <NavItem link="/home">Dashboard</NavItem>
     <NavItem link="/daily">Daily</NavItem>
     <NavItem link="/airtime">Airtime</NavItem>
+    <NavItem link="/login">Logout</NavItem>
   </ul>
 );
 

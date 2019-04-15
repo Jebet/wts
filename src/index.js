@@ -3,13 +3,13 @@ import { BrowserRouter as Router } from "react-router-dom";
 import ReactDOM from "react-dom";
 import "./index.css";
 import "semantic-ui-react";
-import { store } from "./Redux.Helpers/store";
+import { store } from "./helpers/store";
 import ConnectedApp, { App } from "./App";
 import { render } from "react-dom";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 // setup fake backend
-import { configureFakeBackend } from "./Redux.Helpers/fake-backend";
+import { configureFakeBackend } from "./helpers/fake-backend";
 configureFakeBackend();
 
 render(

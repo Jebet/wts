@@ -1,29 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { userActions } from "../Action/UserActions";
-import store from "../Redux.Helpers/store";
+import { userService } from "../Services/user.service";
+import "./LogIn.css";
 
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
 
-    // reset login status
-    this.props.dispatch(userActions.logout());
+    userService.logout();
 
     this.state = {
       username: "",
       password: "",
-      submitted: false
+      submitted: false,
+      loading: false,
+      error: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.routeChange = this.routeChange.bind(this);
-  }
-  routeChange() {
-    let path = `newPath`;
-    this.props.history.push("/home");
   }
 
   handleChange(e) {
@@ -35,24 +31,36 @@ class LoginPage extends React.Component {
     e.preventDefault();
 
     this.setState({ submitted: true });
-    const { username, password } = this.state;
-    const { dispatch } = this.props;
-    if (username && password) {
-      dispatch(userActions.login(username, password));
+    const { username, password, returnUrl } = this.state;
+
+    // stop here if form is invalid
+    if (!(username && password)) {
+      return;
     }
+
+    this.setState({ loading: true });
+    userService.login(username, password).then(
+      user => {
+        const { from } = this.props.location.state || {
+          from: { pathname: "/home" }
+        };
+        this.props.history.push(from);
+      },
+      error => this.setState({ error, loading: false })
+    );
   }
 
   render() {
-    const { loggingIn } = this.props;
-    const { username, password, submitted } = this.state;
+    const { username, password, submitted, loading, error } = this.state;
     return (
       <div className="col-md-6 col-md-offset-3" id="login-cont">
-        <h2 style={{left: "270px"}}>Login</h2>
-        <form
-          name="form"
-          onSubmit={this.handleSubmit}
-          style={{ left: "250px", position: "relative" }}
-        >
+        <div className="alert alert-info">
+          Username: test
+          <br />
+          Password: test
+        </div>
+        <h2>Login</h2>
+        <form name="form" onSubmit={this.handleSubmit}>
           <div
             className={
               "form-group" + (submitted && !username ? " has-error" : "")
@@ -63,9 +71,9 @@ class LoginPage extends React.Component {
               type="text"
               className="form-control"
               name="username"
+              style={{ width: "380px" }}
               value={username}
               onChange={this.handleChange}
-              style={{ width: "90%" }}
             />
             {submitted && !username && (
               <div className="help-block">Username is required</div>
@@ -83,39 +91,24 @@ class LoginPage extends React.Component {
               name="password"
               value={password}
               onChange={this.handleChange}
-              style={{ width: "90%" }}
             />
             {submitted && !password && (
               <div className="help-block">Password is required</div>
             )}
           </div>
           <div className="form-group">
-            <button className="btn btn-primary" onClick={this.routeChange}>
-              {" "}
+            <button className="btn btn-primary" disabled={loading}>
               Login
             </button>
-            {loggingIn && (
+            {loading && (
               <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
             )}
           </div>
+          {error && <div className={"alert alert-danger"}>{error}</div>}
         </form>
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  const { loggingIn } = state;
-  return {
-    loggingIn: state.authentication,
-    loggingIn
-  };
-}
-
-// const mapStateToProps = state => {
-//   const loggingIn = this.props.loggingIn;
-//   return { loggingIn: state.authentication }, { loggingIn };
-// };
-
-const connectedLoginPage = connect(mapStateToProps)(LoginPage);
-export { connectedLoginPage as LoginPage };
+export { LoginPage };

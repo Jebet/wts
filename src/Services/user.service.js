@@ -1,14 +1,10 @@
-// import config from "./redux.config";
-import { authHeader } from "../Redux.Helpers/auth-header";
+// import config from "../config/config";
+import { authHeader } from "../helpers/auth-header";
 
 export const userService = {
   login,
   logout,
-  register,
-  getAll,
-  getById,
-  update,
-  delete: _delete
+  getAll
 };
 
 function login(username, password) {
@@ -18,11 +14,16 @@ function login(username, password) {
     body: JSON.stringify({ username, password })
   };
 
-  return fetch(`${"http://localhost:4000"}/users/authenticate`, requestOptions)
+  return fetch(`${"http:localhost//4000"}/users/authenticate`, requestOptions)
     .then(handleResponse)
     .then(user => {
-      // store user details and jwt token in local storage to keep user logged in between page refreshes
-      localStorage.setItem("user", JSON.stringify(user));
+      // login successful if there's a user in the response
+      if (user) {
+        // store user details and basic auth credentials in local storage
+        // to keep user logged in between page refreshes
+        user.authdata = window.btoa(username + ":" + password);
+        localStorage.setItem("user", JSON.stringify(user));
+      }
 
       return user;
     });
@@ -39,54 +40,7 @@ function getAll() {
     headers: authHeader()
   };
 
-  return fetch(`${"http://localhost:4000"}/users`, requestOptions).then(handleResponse);
-}
-
-function getById(id) {
-  const requestOptions = {
-    method: "GET",
-    headers: authHeader()
-  };
-
-  return fetch(`"http://localhost:4000"}/users/${id}`, requestOptions).then(
-    handleResponse
-  );
-}
-
-function register(user) {
-  const requestOptions = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(user)
-  };
-
-  return fetch(`${"http://localhost:4000"}/users/register`, requestOptions).then(
-    handleResponse
-  );
-}
-
-function update(user) {
-  const requestOptions = {
-    method: "PUT",
-    headers: { ...authHeader(), "Content-Type": "application/json" },
-    body: JSON.stringify(user)
-  };
-
-  return fetch(`${"http://localhost:4000"}/users/${user.id}`, requestOptions).then(
-    handleResponse
-  );
-}
-
-// prefixed function name with underscore because delete is a reserved word in javascript
-function _delete(id) {
-  const requestOptions = {
-    method: "DELETE",
-    headers: authHeader()
-  };
-
-  return fetch(`${"http://localhost:4000"}/users/${id}`, requestOptions).then(
-    handleResponse
-  );
+  return fetch(`${"http:localhost//4000"}/users`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

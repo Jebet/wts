@@ -4,10 +4,10 @@ import AreaChart from "./Charts/Assets/AreaChart";
 import DoughnutChart from "./Charts/Assets/DoughnutChart";
 import OhlcChart from "./Charts/Assets/OhlcChart";
 import PieChart from "./Charts/Assets/PieChart";
-import { Link, Redirect } from "react-router-dom";
+// import { Link, Redirect } from "react-router-dom";
 import "../Dashboard/HomePage.css";
 import { connect } from "react-redux";
-import { userActions } from "../Action/UserActions";
+import { userActions } from "../Action/user.Actions";
 
 class Home extends React.Component {
   componentDidMount() {
@@ -17,7 +17,22 @@ class Home extends React.Component {
   handleDeleteUser(id) {
     return e => this.props.dispatch(userActions.delete(id));
   }
-
+  omponentDidMount = () => {
+    fetch("https://jsonplaceholder.typicode.com/posts/1", {
+      method: "GET"
+    })
+      .then(response => response.json())
+      .then(responseJson => {
+        console.log(responseJson);
+        this.setState({
+          data: responseJson
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+  
   render() {
     const { user, users } = this.props;
     return (

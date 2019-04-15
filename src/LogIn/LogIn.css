@@ -1,17 +1,23 @@
-@media all and (min-width: 480px) {
-  .Login {
-    padding: 60px 0;
+#login-cont {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+form {
+  width: 500px;
+  padding: 5px;
+}
+.form-control {
+  width: 380px;
+}
+input[type="password"] {
+  width: 380px;
+}
+input[type="text"] {
+  width: 380px;
+}
+@media (min-width: 400px) and (max-width:900px) {
+  form{
+    
   }
-
-  .Login.form {
-    margin: 0 auto;
-    max-width: 320px;
-  }
-  input[type="text"] {
-    width: 300px;
-  }
-  .col-md-6.col-md-offset-3 {
-    display: flex;
-  }
-  
 }

@@ -56,9 +56,9 @@ class App extends Component {
               <Router history={history}>
                 <div>
                   <Switch>
+                    <PrivateRoute exact path="/" component={Home} />
                     <Route path="/login" exact component={LoginPage} />
-                    <Route exact path="/home" component={Home} />
-                    {/* <Route path="/home" exact component={Home} /> */}
+                    <Route path="/home" exact component={Home} />
                     <Route path="/airtime" exact component={Airtime} />
                     <Route path="/daily" exact component={Daily} />
                     <Route path="/Menu" exact component={Menu} />

@@ -4,20 +4,29 @@
   margin: 0 auto;
 }
 form {
-  width: 500px;
+  max-width: 500px;
   padding: 5px;
 }
 .form-control {
   width: 380px;
 }
+#username {
+  width: 80%;
+}
 input[type="password"] {
-  width: 380px;
+  width: 80%;
 }
-input[type="text"] {
-  width: 380px;
-}
-@media (min-width: 400px) and (max-width:900px) {
-  form{
-    
+/* input[type="text"] {
+  width: 50%;
+} */
+@media only screen and (min-width: 499px) and (max-width: 500px) {
+  form {
+    width: 100%;
+  }
+  #username {
+    width: 100%;
+  }
+  input[type="password"] {
+    width: 100%;
   }
 }

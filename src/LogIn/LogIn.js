@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+// import { Link } from "react-router-dom";
+// import { connect } from "react-redux";
 import { userService } from "../Services/user.service";
 import "./LogIn.css";
 
@@ -70,8 +70,9 @@ class LoginPage extends React.Component {
             <input
               type="text"
               className="form-control"
+              id="username"
               name="username"
-              style={{ width: "380px" }}
+              // style={{ width: "380px" }}
               value={username}
               onChange={this.handleChange}
             />

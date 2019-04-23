@@ -26,6 +26,7 @@
     height: 100%;
     width: auto;
     align-items: center;
+    justify-content: space-evenly;
   }
 
   .NavigationItem a {

@@ -17,10 +17,10 @@ class Menu extends React.Component {
     };
   }
   render() {
-    const childProps = {
-      isAuthenticated: this.state.isAuthenticated,
-      userHasAuthenticated: this.userHasAuthenticated
-    };
+    // const childProps = {
+    //   isAuthenticated: this.state.isAuthenticated,
+    //   userHasAuthenticated: this.userHasAuthenticated
+    // };
     return (
       <div>
         <MenuIcon onClick={() => this.setState({ showNav: true })} />
@@ -38,13 +38,13 @@ class Menu extends React.Component {
             itemHoverStyle={{ backgroundColor: "#000" }}
             items={[
               <NavItem link="/home">
-                <i class="icon-dashboard" />
+                <i className="icon-dashboard" />
                 Dashboard
               </NavItem>,
               <NavItem link="/daily">Daily</NavItem>,
               <NavItem link="/airtime">Airtime</NavItem>,
-              <NavItem link="/login">LogOut</NavItem>,
-              <NavItem link="/login">LogIn</NavItem>
+              <NavItem>Settings</NavItem>,
+              <NavItem link="/login">Logout</NavItem>
             ]}
           />
         </Router>

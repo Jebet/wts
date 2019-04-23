@@ -1,3 +1,6 @@
+*{
+  box-sizing: border-box;
+}
 body {
   background-color: #eee;
   font-family: sans-serif;
@@ -5,8 +8,10 @@ body {
   padding: 25px;
   margin: 0;
   overflow: auto;
+  width: 100%;
 }
 
 #container li {
   margin-bottom: 10px;
+  width: 100%;
 }

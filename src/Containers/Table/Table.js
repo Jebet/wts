@@ -44,10 +44,10 @@ class FormTable extends React.Component {
       });
     } else if (this.submitInput.value === "Edit") {
       const pos = Number(this.rowRef.value);
-      this.state.users[pos].name = this.inputName.value;
-      this.state.users[pos].telephone = this.inputtelephone.value;
-      this.state.users[pos].amount = this.inputamount.value;
-      this.state.users[pos].department = this.inputdepartment.value;
+      this.setState.users[pos].name = this.inputName.value;
+      this.setState.users[pos].telephone = this.inputtelephone.value;
+      this.setState.users[pos].amount = this.inputamount.value;
+      this.setState.users[pos].department = this.inputdepartment.value;
       this.submitInput.value = "Submit";
       this.clearInputs();
 
@@ -60,10 +60,10 @@ class FormTable extends React.Component {
     this.inputTelephone.value = "";
     this.inputAmount.value = "";
     this.inputDepartment.value = "";
-    this.state.name = "";
-    this.state.telephone = "";
-    this.state.amount = "";
-    this.state.department = "";
+    this.setState.name = "";
+    this.setState.telephone = "";
+    this.setState.amount = "";
+    this.setState.department = "";
   }
   deleteRow(row) {
     var pos = this.state.users.indexOf(row);
@@ -73,17 +73,17 @@ class FormTable extends React.Component {
   editRow(row) {
     var pos = this.state.users.indexOf(row);
     this.inputName.value = this.state.users[row].name;
-    this.state.name = this.state.users[row].name;
+    this.setState.name = this.state.users[row].name;
     this.inputTelephone.value = this.state.users[row].telephone;
-    this.state.telephone = this.state.users[row].telephone;
+    this.setState.telephone = this.state.users[row].telephone;
     this.inputDepartment.value = this.state.users[row].Department;
-    this.state.department = this.state.users[row].department;
+    this.setState.department = this.state.users[row].department;
     this.inputAmount.value = this.state.users[row].amount;
-    this.state.amount = this.state.users[row].amount;
+    this.setState.amount = this.state.users[row].amount;
     this.inputDepartment.value = this.state.users[row].department;
-    this.state.department = this.state.users[row].department;
+    this.setState.department = this.state.users[row].department;
     this.rowRef.value = row;
-    this.state.input = "Edit";
+    this.setState.input = "Edit";
     this.forceUpdate();
   }
 
@@ -95,29 +95,16 @@ class FormTable extends React.Component {
     this.setState({ lgshow: true });
   }
 
-  getUsers() {
-    axios
-      .get("https://api.myjson.com/bins/i7ka2")
-      .then(response =>
-        response.data.results.map(user => ({
-          name: `${user.name.first}`,
-          username: `${user.login.username}`,
-          telephone: `${user.telephone}`,
-          amount: `${user.amount}`,
-          department: `${user.department}`
-        }))
-      )
-      .then(users => {
-        this.setState({
-          users,
-          isLoading: false
-        });
-      })
-      .catch(error => this.setState({ error, isLoading: false }));
-  }
-
   componentDidMount() {
-    this.getUsers();
+    const users = {
+      name: this.state.name
+    };
+    axios
+      .post(`https://jsonplaceholder.typicode.com/users`, { users })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      });
   }
 
   render() {
@@ -164,9 +151,9 @@ class FormTable extends React.Component {
                 onSubmit={this.onSubmit.bind(this)}
               >
                 <div className="input-group">
-                  <div class="col-md-6">
+                  <div className="col-md-6">
                     <label className="name">
-                      <i class="glyphicon glyphicon-user" />
+                      <i className="glyphicon glyphicon-user" />
                       Name
                     </label>
                     <input
@@ -186,7 +173,7 @@ class FormTable extends React.Component {
                 </div>
 
                 <div className="input-group">
-                  <div class="col-md-6">
+                  <div className="col-md-6">
                     <label className="phone">Telephone</label>
                     <input
                       type="numeric"
@@ -205,12 +192,12 @@ class FormTable extends React.Component {
                 </div>
 
                 <div className="input-group">
-                  <div class="col-md-6">
+                  <div className="col-md-6">
                     <label className="department" style={{ color: "black" }}>
                       Department
                     </label>
                     <select
-                      class="custom-select"
+                      className="custom-select"
                       input
                       type="text"
                       required
@@ -235,7 +222,7 @@ class FormTable extends React.Component {
                 </div>
 
                 <div className="input-group">
-                  <div class="col-md-6">
+                  <div className="col-md-6">
                     <label className="amount">Amount</label>
                     <input
                       type="numeric"
@@ -253,11 +240,11 @@ class FormTable extends React.Component {
                   </div>
                 </div>
                 <button className="upload" id="file">
-                  <i class="fas fa-file-upload" />
+                  <i className="fas fa-file-upload" />
                   <h6 className="contentName">file</h6>
                 </button>
                 <div className="form-group">
-                  <div class="col-md-6">
+                  <div className="col-md-6">
                     <button
                       type="submit"
                       ref={ref => (this.submitInput = ref)}
@@ -301,7 +288,7 @@ class FormTable extends React.Component {
               // show the loading overlay
               this.setState({ loading: true });
               // fetch your data
-              Axios.post("https://api.myjson.com/bins/1573y2", {
+              Axios.post("", {
                 page: state.page,
                 pageSize: state.pageSize,
                 sorted: state.sorted,

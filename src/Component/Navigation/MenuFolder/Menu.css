@@ -1,1 +1,10 @@
+.MenuIcon {
+  min-width: 60px;
+  min-height: 60px;
+}
 
+#sideNav {
+  min-width: 400px;
+  height: auto;
+  position: relative;
+}

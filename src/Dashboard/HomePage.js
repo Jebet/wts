@@ -34,7 +34,7 @@ class Home extends React.Component {
   };
   
   render() {
-    const { user, users } = this.props;
+    // const { user, users } = this.props;
     return (
       <div className="bootstrap-wrapper ">
         <div>

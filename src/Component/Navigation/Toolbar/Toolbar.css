@@ -1,45 +1,52 @@
-.Toolbar {
-  height: 56px;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: #000103;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  box-sizing: border-box;
-  z-index: 90;
-  color: white;
+nav {
+  background-color: #000;
+  overflow: hidden;
+  padding: 1em;
+  border-bottom: 1px solid #000;
+  bottom: 18px;
+  font-weight: 500;
 }
 
-.Toolbar nav {
-  height: 100%;
+nav a {
+  color: #fff;
 }
-
-.Logo {
-  height: 80%;
+nav a:visited {
+  color: #fff;
 }
-
-.toolbar-logo {
-  right: 28rem;
-  position: relative;
+nav .navWide {
+  display: none;
+  margin: 0 auto;
+ 
 }
-
-.toolbar-logo a {
-  color: white;
+nav .navWide .wideDiv {
+  text-align: right;
+  width: 100vw;
+}
+nav .navWide .wideDiv a {
   text-decoration: none;
-  font-size: 1.5rem;
-  left: 1rem;
+  display: inline-block;
+  padding: 0 2em;
 }
-.logoImage {
-  width: auto;
-  height: 40px;
+nav .navNarrow i {
+  float: left;
+  cursor: pointer;
+  color: #fff;
 }
-
-@media (max-width: 499px) {
-  .DesktopOnly {
+nav .navNarrow .narrowLinks {
+  display: none;
+}
+nav .navNarrow .narrowLinks a {
+  text-decoration: none;
+  display: block;
+  float: left;
+  clear: left;
+  padding: 0.5em 0;
+}
+@media (min-width: 480px) {
+  nav .navWide {
+    display: block;
+  }
+  nav .navNarrow {
     display: none;
   }
 }

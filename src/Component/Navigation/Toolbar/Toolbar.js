@@ -27,7 +27,7 @@ class toolbar extends React.Component {
               <a href="/home">Dashboard</a>
               <a href="airtime">Airtime</a>
               <a href="/daily">Dailies</a>
-              <a href="/logout">Logout</a>
+              <a href="/login">Logout</a>
             </div>
           </div>
           <div className="navNarrow">
